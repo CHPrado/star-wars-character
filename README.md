@@ -1,6 +1,6 @@
 # Star wars
 
-An app where you can search for a Star Wars character, see it's detailed information and save it to check it out later.
+An app where you can search for a Star Wars character, see it's detailed information and save it as favorite to check it out later.
 
 ## Setup app
 
