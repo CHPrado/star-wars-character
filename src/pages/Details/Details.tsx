@@ -12,9 +12,13 @@ import {
 import { StarsOutlined } from "@material-ui/icons";
 import moment from "moment";
 
-import Header from "../../components/Header";
+import { Header, Snackbar } from "../../components";
 import { useFavorites } from "../../hooks";
-import { CharacterRouteProps, FilmProps } from "../../interfaces";
+import {
+  CharacterRouteProps,
+  FilmProps,
+  SnackbarProps,
+} from "../../interfaces";
 import starWarsApi from "../../services/starWarsApi";
 import useStyles from "./styles";
 
@@ -25,9 +29,17 @@ const Details: FC<CharacterRouteProps> = (props) => {
   const [film, setFilm] = useState<FilmProps>();
   const [films, setFilms] = useState<FilmProps[]>([]);
   const character = props.location.state.character;
+  const [snackbar, setSnackbar] = useState<SnackbarProps>({});
 
   const handleSaveClick = () => {
     saveFavorite(character);
+
+    setSnackbar({
+      open: true,
+      message: "Personagem salvo nos favoritos",
+      type: "success",
+      onClose: () => setSnackbar({ open: false }),
+    });
   };
 
   useEffect(() => {
@@ -41,9 +53,7 @@ const Details: FC<CharacterRouteProps> = (props) => {
         setFilm(film);
       });
 
-      console.log(character.films.length);
       if (index === character.films.length - 1) {
-        console.log(index);
         setLoading(false);
       }
     });
@@ -183,6 +193,8 @@ const Details: FC<CharacterRouteProps> = (props) => {
           </Box>
         )}
       </Box>
+
+      <Snackbar {...snackbar} />
     </Box>
   );
 };

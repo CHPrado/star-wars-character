@@ -11,7 +11,7 @@ import {
 import { SearchOutlined } from "@material-ui/icons";
 
 import starWars from "../../assets/starWars.png";
-import Header from "../../components/Header";
+import { Header } from "../../components";
 import { CharacterProps } from "../../interfaces";
 import starWarsApi from "../../services/starWarsApi";
 import useStyles from "./styles";

@@ -3,9 +3,9 @@ import { useHistory } from "react-router-dom";
 
 import { Box, Button, Typography } from "@material-ui/core";
 
-import Header from "../../components/Header";
+import { Header, Snackbar } from "../../components";
 import { useFavorites } from "../../hooks";
-import { CharacterProps } from "../../interfaces";
+import { CharacterProps, SnackbarProps } from "../../interfaces";
 import useStyles from "./styles";
 
 const Favorites = () => {
@@ -13,6 +13,7 @@ const Favorites = () => {
   const history = useHistory();
   const { getFavorites, removeFavorite } = useFavorites();
   const [favorites, setFavorites] = useState(getFavorites());
+  const [snackbar, setSnackbar] = useState<SnackbarProps>({});
 
   const handleClickDetails = (character: CharacterProps) => {
     history.push({ pathname: "/details", state: { character } });
@@ -21,6 +22,13 @@ const Favorites = () => {
   const handleClickRemove = (name: string) => {
     removeFavorite(name);
     setFavorites(getFavorites());
+
+    setSnackbar({
+      open: true,
+      message: "Personagem removido dos favoritos",
+      type: "success",
+      onClose: () => setSnackbar({ open: false }),
+    });
   };
 
   return (
@@ -63,6 +71,8 @@ const Favorites = () => {
           );
         })}
       </Box>
+
+      <Snackbar {...snackbar} />
     </Box>
   );
 };
