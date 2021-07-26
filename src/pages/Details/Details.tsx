@@ -143,8 +143,8 @@ const Details: FC<CharacterRouteProps> = (props) => {
                 </Box>
 
                 <Box>
-                  <Typography>{character.mass}Kg</Typography>
                   <Typography>{character.height}</Typography>
+                  <Typography>{character.mass}Kg</Typography>
                   <Typography>{character.gender}</Typography>
                 </Box>
               </Box>
